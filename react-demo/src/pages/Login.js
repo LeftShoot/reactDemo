@@ -1,66 +1,54 @@
 import React from 'react';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Select } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import '../assets/css/Login.css';
 
 export default () => {
     const onFinish = values => {
         console.log('Received values of form: ', values);
-      };
+    };
+
+    const initialValues = {
+      remember: true
+    }
+
+    const rules = {
+      'username': [{
+          required: true,
+          message: '请输入账号!',
+        }],
+      'password': [{
+          required: true,
+          message: '请输入密码!',
+        }] 
+    }  
     
       return (
         <div id="components-form-demo-normal-login">
-        <Form
-          name="normal_login"
-          className="login-form"
-          initialValues={{
-            remember: true,
-          }}
-          onFinish={onFinish}
-        >
-          <Form.Item
-            name="username"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your Username!',
-              },
-            ]}
-          >
-            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+         <Form name="normal_login" className="login-form" initialValues={initialValues} onFinish={onFinish}>
+          <Form.Item name="username" rules={rules["username"]}>
+            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="请输入账号" />
           </Form.Item>
-          <Form.Item
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your Password!',
-              },
-            ]}
-          >
-            <Input
-              prefix={<LockOutlined className="site-form-item-icon" />}
-              type="password"
-              placeholder="Password"
-            />
+          <Form.Item name="password" rules={rules["password"]}>
+            <Input prefix={<LockOutlined className="site-form-item-icon" />} type="password" placeholder="请输入密码"/>
           </Form.Item>
           <Form.Item>
             <Form.Item name="remember" valuePropName="checked" noStyle>
-              <Checkbox>Remember me</Checkbox>
+            <Select>
+             <Select.Option value="sdxlt">输气象线路图</Select.Option>
+             <Select.Option value="sdjm">气象建模</Select.Option>
+             <Select.Option value="webjm">web建模</Select.Option>
+             <Select.Option value="jsjzs">旧数据展示</Select.Option>
+            </Select>
             </Form.Item>
-    
-            <a className="login-form-forgot" href="">
-              Forgot password
-            </a>
           </Form.Item>
     
           <Form.Item>
             <Button type="primary" htmlType="submit" className="login-form-button">
-              Log in
+              登录
             </Button>
-            Or <a href="">register now!</a>
           </Form.Item>
-        </Form>
+         </Form>
         </div>
           );
 };
