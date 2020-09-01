@@ -1,16 +1,31 @@
 import React from 'react';
-import { HashRouter as Router, Link, Route } from 'react-router-dom';
+import { HashRouter as Router, Switch } from 'react-router-dom';
+import { FrontendAuth } from './components/frontend-auth';
 
 import './App.css';
 import './index.css';
 import Index from './pages/Index';
 import Login from './pages/Login';
 
+const routerConfig = [
+  {
+    path: '/',
+    component: Index,
+    auth: true
+  },
+  {
+    path: '/Login',
+    component: Login,
+    auth: false
+  }
+]
+
 
 const App = () => (
   <Router>
-    <Route path="/" exact component={Index}></Route>
-    <Route path="/Login" component={Login}></Route>
+    <Switch>
+      <FrontendAuth config={routerConfig}></FrontendAuth>
+    </Switch>
   </Router>
 );
 
