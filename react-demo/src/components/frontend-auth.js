@@ -4,9 +4,26 @@ import { Route, Redirect } from 'react-router-dom';
 export class FrontendAuth extends React.Component{
     render(){
        const { location, config } = this.props;
+       const pathname = location.pathname;
+       const isLogin = false;
 
-       const targetRouterConfig = config[1];
-       return <Route path={ targetRouterConfig.path } component={targetRouterConfig.component } />
-    //   return <Redirect to='/404' />
+       const targetRouterConfig = config.find(item => item.path == pathname);
+
+       if(targetRouterConfig && !targetRouterConfig.auth && !isLogin){
+           let { path, component } = targetRouterConfig;
+       }
+
+       if(!isLogin){
+         if(!targetRouterConfig){
+           return <Redirect to="/404" />
+         }
+
+         if(!targetRouterConfig.auth){
+           return <Route path={ targetRouterConfig.path } component={ targetRouterConfig.component } />
+         }else{
+           return <Redirect to="/Login" />
+         }
+       }
+
     }
 }
