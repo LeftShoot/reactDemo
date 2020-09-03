@@ -7,11 +7,7 @@ export class FrontendAuth extends React.Component{
        const pathname = location.pathname;
        const isLogin = false;
 
-       const targetRouterConfig = config.find(item => item.path == pathname);
-
-       if(targetRouterConfig && !targetRouterConfig.auth && !isLogin){
-           let { path, component } = targetRouterConfig;
-       }
+       const targetRouterConfig = config.find(item => item.path === pathname);
 
        if(!isLogin){
          if(!targetRouterConfig){

@@ -3,6 +3,8 @@ import { Form, Input, Button, Select } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import '../assets/css/Login.css';
 
+import axios from 'axios';
+
 export default () => {
     const onFinish = values => {
         console.log('Received values of form: ', values);
@@ -22,6 +24,10 @@ export default () => {
           message: '请输入密码!',
         }] 
     }  
+
+    axios.get('https://api.github.com/search/repositories?q=r&sort=stars', {}).then(response => {
+
+    })
     
       return (
         <div id="components-form-demo-normal-login">
