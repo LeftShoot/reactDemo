@@ -2,13 +2,16 @@ import React from 'react';
 import { Form, Input, Button, Select } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import '../assets/css/Login.css';
+import { Spin } from 'antd';
 
 import axios from 'axios';
 
 export default () => {
+    let isLoading = false;
+
     const onFinish = values => {
         console.log('Received values of form: ', values);
-
+        isLoading = true;
         axios.post('http://rap2.taobao.org:38080/app/mock/data/1722836', {
           account: '',
           psw: ''
@@ -34,8 +37,14 @@ export default () => {
     
       return (
         <div id="components-form-demo-normal-login">
-         <Form name="normal_login" className="login-form" initialValues={initialValues} onFinish={onFinish}>
 
+         <Form name="normal_login" className="login-form" initialValues={initialValues} onFinish={onFinish}>
+           {
+             isLoading && 
+             <div className="example">
+              <Spin />
+             </div>
+           }
           <Form.Item name="username" rules={rules["username"]}>
             <Input prefix={<UserOutlined/>} placeholder="请输入账号" />
           </Form.Item>
