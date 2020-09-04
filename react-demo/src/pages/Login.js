@@ -8,6 +8,13 @@ import axios from 'axios';
 export default () => {
     const onFinish = values => {
         console.log('Received values of form: ', values);
+
+        axios.post('http://rap2.taobao.org:38080/app/mock/data/1722836', {
+          account: '',
+          psw: ''
+        }).then(response => {
+
+        })
     };
 
     const initialValues = {
@@ -24,10 +31,6 @@ export default () => {
           message: '请输入密码!',
         }] 
     }  
-
-    axios.get('https://api.github.com/search/repositories?q=r&sort=stars', {}).then(response => {
-
-    })
     
       return (
         <div id="components-form-demo-normal-login">
